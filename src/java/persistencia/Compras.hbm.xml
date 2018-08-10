@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-10-2018 10:34:34 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="persistencia.Compras" table="compras" catalog="control_de_inventario" optimistic-lock="version">
+        <id name="idCompra" type="java.lang.Integer">
+            <column name="id_compra" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="contactos" class="persistencia.Contactos" fetch="select">
+            <column name="id_contacto" not-null="true" />
+        </many-to-one>
+        <many-to-one name="inventario" class="persistencia.Inventario" fetch="select">
+            <column name="id_inventario" not-null="true" />
+        </many-to-one>
+        <many-to-one name="iva" class="persistencia.Iva" fetch="select">
+            <column name="id_iva" not-null="true" />
+        </many-to-one>
+        <many-to-one name="productos" class="persistencia.Productos" fetch="select">
+            <column name="id_producto" not-null="true" />
+        </many-to-one>
+        <property name="fechaCompra" type="string">
+            <column name="fecha_compra" length="20" />
+        </property>
+        <property name="totalCompra" type="java.lang.Double">
+            <column name="total_compra" precision="9" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-10-2018 10:34:34 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="persistencia.Iva" table="iva" catalog="control_de_inventario" optimistic-lock="version">
+        <id name="idIva" type="java.lang.Integer">
+            <column name="id_iva" />
+            <generator class="identity" />
+        </id>
+        <property name="ivaTasa" type="java.lang.Double">
+            <column name="iva_tasa" precision="5" />
+        </property>
+        <property name="ivaRetenido" type="java.lang.Double">
+            <column name="iva_retenido" precision="5" />
+        </property>
+        <property name="ivaPagado" type="java.lang.Double">
+            <column name="iva_pagado" precision="5" />
+        </property>
+        <property name="ivaTotal" type="java.lang.Double">
+            <column name="iva_total" precision="5" />
+        </property>
+        <set name="facturaDetalles" table="factura_detalle" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_iva" not-null="true" />
+            </key>
+            <one-to-many class="persistencia.FacturaDetalle" />
+        </set>
+        <set name="comprases" table="compras" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_iva" not-null="true" />
+            </key>
+            <one-to-many class="persistencia.Compras" />
+        </set>
+    </class>
+</hibernate-mapping>

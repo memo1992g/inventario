@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-10-2018 10:34:34 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="persistencia.Configuracion" table="configuracion" catalog="control_de_inventario" optimistic-lock="version">
+        <id name="idConfiguracion" type="java.lang.Integer">
+            <column name="id_configuracion" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="acceso" class="persistencia.Acceso" fetch="select">
+            <column name="id_acceso" not-null="true" />
+        </many-to-one>
+        <many-to-one name="empresa" class="persistencia.Empresa" fetch="select">
+            <column name="id_empresa" not-null="true" />
+        </many-to-one>
+        <property name="logo" type="binary">
+            <column name="logo" />
+        </property>
+        <property name="simboloMoneda" type="string">
+            <column name="simbolo_moneda" length="20" />
+        </property>
+        <property name="nombreMoneda" type="string">
+            <column name="nombre_moneda" length="20" />
+        </property>
+        <property name="codigoMoneda" type="string">
+            <column name="codigo_moneda" length="5" />
+        </property>
+        <property name="iva" type="java.lang.Double">
+            <column name="iva" precision="4" />
+        </property>
+        <property name="zonaHoraria" type="string">
+            <column name="zona_horaria" length="50" />
+        </property>
+        <set name="facturaDetalles" table="factura_detalle" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_configuracion" not-null="true" />
+            </key>
+            <one-to-many class="persistencia.FacturaDetalle" />
+        </set>
+    </class>
+</hibernate-mapping>

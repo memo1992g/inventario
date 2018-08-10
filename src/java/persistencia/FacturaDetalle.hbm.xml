@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-10-2018 10:34:34 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="persistencia.FacturaDetalle" table="factura_detalle" catalog="control_de_inventario" optimistic-lock="version">
+        <id name="idFacturaDetalle" type="java.lang.Integer">
+            <column name="id_factura_detalle" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="configuracion" class="persistencia.Configuracion" fetch="select">
+            <column name="id_configuracion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="facturaEncabezado" class="persistencia.FacturaEncabezado" fetch="select">
+            <column name="id_factura_encabezado" not-null="true" />
+        </many-to-one>
+        <many-to-one name="iva" class="persistencia.Iva" fetch="select">
+            <column name="id_iva" not-null="true" />
+        </many-to-one>
+        <many-to-one name="productos" class="persistencia.Productos" fetch="select">
+            <column name="id_producto" not-null="true" />
+        </many-to-one>
+        <property name="cantidad" type="java.lang.Integer">
+            <column name="cantidad" />
+        </property>
+        <property name="totalFila" type="java.lang.Double">
+            <column name="total_fila" precision="22" scale="0" />
+        </property>
+        <property name="totalColumna" type="java.lang.Double">
+            <column name="total_columna" precision="22" scale="0" />
+        </property>
+        <property name="subtotalColumna" type="java.lang.Double">
+            <column name="subtotal_columna" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

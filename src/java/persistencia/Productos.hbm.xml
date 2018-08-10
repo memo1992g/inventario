@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-10-2018 10:34:34 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="persistencia.Productos" table="productos" catalog="control_de_inventario" optimistic-lock="version">
+        <id name="idProducto" type="java.lang.Integer">
+            <column name="id_producto" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="fabricantes" class="persistencia.Fabricantes" fetch="select">
+            <column name="id_fabricante" not-null="true" />
+        </many-to-one>
+        <property name="nombreProducto" type="string">
+            <column name="nombre_producto" length="50" />
+        </property>
+        <property name="precioUnitario" type="java.lang.Double">
+            <column name="precio_unitario" precision="7" />
+        </property>
+        <property name="descripcionProducto" type="string">
+            <column name="descripcion_producto" length="100" />
+        </property>
+        <property name="modelo" type="string">
+            <column name="modelo" length="50" />
+        </property>
+        <set name="inventarios" table="inventario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_producto" not-null="true" />
+            </key>
+            <one-to-many class="persistencia.Inventario" />
+        </set>
+        <set name="facturaDetalles" table="factura_detalle" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_producto" not-null="true" />
+            </key>
+            <one-to-many class="persistencia.FacturaDetalle" />
+        </set>
+        <set name="comprases" table="compras" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_producto" not-null="true" />
+            </key>
+            <one-to-many class="persistencia.Compras" />
+        </set>
+    </class>
+</hibernate-mapping>

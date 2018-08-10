@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-10-2018 10:34:34 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="persistencia.Fabricantes" table="fabricantes" catalog="control_de_inventario" optimistic-lock="version">
+        <id name="idFabricante" type="java.lang.Integer">
+            <column name="id_fabricante" />
+            <generator class="identity" />
+        </id>
+        <property name="nombreFabricante" type="string">
+            <column name="nombre_fabricante" length="50" />
+        </property>
+        <property name="numeroProductos" type="java.lang.Integer">
+            <column name="numero_productos" />
+        </property>
+        <property name="descripcionFabricante" type="string">
+            <column name="descripcion_fabricante" length="50" />
+        </property>
+        <property name="fechaRegistroFabricante" type="string">
+            <column name="fecha_registro_fabricante" length="20" />
+        </property>
+        <set name="productoses" table="productos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_fabricante" not-null="true" />
+            </key>
+            <one-to-many class="persistencia.Productos" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-10-2018 10:34:34 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="persistencia.Empresa" table="empresa" catalog="control_de_inventario" optimistic-lock="version">
+        <id name="idEmpresa" type="java.lang.Integer">
+            <column name="id_empresa" />
+            <generator class="identity" />
+        </id>
+        <property name="nombreEmpresa" type="string">
+            <column name="nombre_empresa" length="50" />
+        </property>
+        <property name="ncr" type="string">
+            <column name="ncr" length="20" />
+        </property>
+        <property name="nit" type="string">
+            <column name="nit" length="30" />
+        </property>
+        <property name="direccionEmpresa" type="string">
+            <column name="direccion_empresa" length="100" />
+        </property>
+        <property name="telefonoEmpresa" type="string">
+            <column name="telefono_empresa" length="20" />
+        </property>
+        <property name="encargadoEmpresa" type="string">
+            <column name="encargado_empresa" length="20" />
+        </property>
+        <property name="emailEmpresa" type="string">
+            <column name="email_empresa" length="50" />
+        </property>
+        <set name="facturaEncabezados" table="factura_encabezado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_empresa" not-null="true" />
+            </key>
+            <one-to-many class="persistencia.FacturaEncabezado" />
+        </set>
+        <set name="accesos" table="acceso" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_empresa" not-null="true" />
+            </key>
+            <one-to-many class="persistencia.Acceso" />
+        </set>
+        <set name="configuracions" table="configuracion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_empresa" not-null="true" />
+            </key>
+            <one-to-many class="persistencia.Configuracion" />
+        </set>
+    </class>
+</hibernate-mapping>

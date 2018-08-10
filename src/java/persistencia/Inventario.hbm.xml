@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-10-2018 10:34:34 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="persistencia.Inventario" table="inventario" catalog="control_de_inventario" optimistic-lock="version">
+        <id name="idInventario" type="java.lang.Integer">
+            <column name="id_inventario" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="productos" class="persistencia.Productos" fetch="select">
+            <column name="id_producto" not-null="true" />
+        </many-to-one>
+        <property name="existencia" type="string">
+            <column name="existencia" length="20" />
+        </property>
+        <property name="estadoExistencia" type="string">
+            <column name="estado_existencia" length="50" />
+        </property>
+        <property name="stockMinimo" type="java.lang.Integer">
+            <column name="stock_minimo" />
+        </property>
+        <property name="estadoFisico" type="string">
+            <column name="estado_fisico" length="50" />
+        </property>
+        <set name="comprases" table="compras" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_inventario" not-null="true" />
+            </key>
+            <one-to-many class="persistencia.Compras" />
+        </set>
+    </class>
+</hibernate-mapping>

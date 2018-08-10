@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-10-2018 10:34:34 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="persistencia.Acceso" table="acceso" catalog="control_de_inventario" optimistic-lock="version">
+        <id name="idAcceso" type="java.lang.Integer">
+            <column name="id_acceso" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="empresa" class="persistencia.Empresa" fetch="select">
+            <column name="id_empresa" not-null="true" />
+        </many-to-one>
+        <property name="nombreAcceso" type="string">
+            <column name="nombre_acceso" length="20" />
+        </property>
+        <property name="apellidoAcceso" type="string">
+            <column name="apellido_acceso" length="20" />
+        </property>
+        <property name="usuario" type="string">
+            <column name="usuario" length="20" />
+        </property>
+        <property name="contrasena" type="string">
+            <column name="contrasena" length="20" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="50" />
+        </property>
+        <property name="tipoAcceso" type="string">
+            <column name="tipo_acceso" length="20" />
+        </property>
+        <property name="fechaRegistroAcceso" type="string">
+            <column name="fecha_registro_acceso" length="20" />
+        </property>
+        <set name="configuracions" table="configuracion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_acceso" not-null="true" />
+            </key>
+            <one-to-many class="persistencia.Configuracion" />
+        </set>
+    </class>
+</hibernate-mapping>
